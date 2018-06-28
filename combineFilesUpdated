@@ -1,12 +1,33 @@
 #!/bin/bash
 
-cd ~/Documents/Contract\ to\ Close/PDF\ Converter
+# find current directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$DIR"
 
-echo “Starting conversion\n”
+# if homebrew is not installed, install homebrew
+if [[ $(command -v brew) == "" ]]; then
+    echo "Installing Hombrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# if imagemagick is not installed, install imagemagick
+if [[ $(command -v convert) == "" ]]; then
+    echo "Installing imagemagick"
+    brew install imagemagick
+fi
+
+# combining JPG files into one PDF
+echo "\n\nCombining JPGs into one file\n"
 convert *.jpg FinishedPDFDocument.pdf
-echo “Finished conversion\n”
-echo "Deleting JPGs"
+echo "Finished conversion\n"
+echo "Deleting JPGs\n"
 rm *.jpg
-echo "Done deleting"
+echo "Finished deleting JPGs\n"
 
-kill -9 $PPID
+# combining any desired PDF files into one PDF
+echo "\nWould you like to combine any PDF files?\n"
+
+
+
+
+osascript -e 'quit app "terminal.app"'
