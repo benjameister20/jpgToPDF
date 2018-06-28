@@ -11,19 +11,19 @@ if [[ $(command -v brew) == "" ]]; then
 fi
 
 # if imagemagick is not installed, install imagemagick
-if [[ $(command -v convert) == "" ]]; then
+if [[ $(command -h convert) == "" ]]; then
     echo "Installing imagemagick"
     brew install imagemagick
 fi
 
 # combining JPG files into one PDF
-echo "\n\nStarting combining of JPGs into one file\n"
+echo "\n\nStarting combination of JPGs into one file\n"
 convert *.jpg FinishedPDFDocument.pdf
 echo "Finished combining JPGs into one PDF\n"
 echo "Starting deleting of JPGs\n"
 rm *.jpg
 echo "Finished deleting JPGs\n"
-echo "What would you like to call the new PDF file? (Press enter when you have typed the name)"
+echo "What would you like to call the new PDF file? (Press enter when you have typed the name)\n"
 read PDFName
 mv FinishedPDFDocument.pdf ${PDFName}.pdf
 
@@ -31,9 +31,44 @@ mv FinishedPDFDocument.pdf ${PDFName}.pdf
 echo "\nWould you like to combine any PDF files? (Type yes or no and press enter)\n"
 read response
 
-	
+# if pdfunite is not installed, then install it
+if [[ $(command -h pdfunit) == "" ]]; then
+    echo "Installing pdfunite"
+    brew install pdfunit
+fi
 
+echo "Please make sure that your PDF files are named 1.pdf, 2.pdf, 3.pdf, ... according to the order in which you would like them to be combined.\n"
+echo "Press enter when this has been done.\n"
 
+echo "Starting combination of PDF files.\n"
+pdfunite $(ls -v *.pdf) output.pdf
+echo "Finished combining PDF files.\n"
+
+#firstPDF = $false
+#while [ $firstPDF
+#echo "Please type the name of the first PDF document to which you would like to add others. Type no if you are done.\n"
+#read response
+
+# get names of PDF files to be combined
+#while [ "$response" != "no" ]; do
+#	echo "Please type the name of the PDF document you would like to add. Type no if you are done.\n"
+#	read response
+#	
+#	if [ "$response" == "no"]; then
+#		break
+#	fi
+#
+#	if [! -f $response]; then
+#		echo "That file does not seem to exist. Please check your spelling for any errors and try again\n"
+#	else
+#		echo "Adding PDF file.\n"
+#		pdftk 
+#	fi
+#done
+#echo "\nBeginning combination of PDF files into one file\n"
+#echo "Finished combining PDFs into one file\n"
+
+echo "\nThank you for using our program and please come back soon :)\n"
 
 # quit terminal window
 osascript -e 'quit app "terminal.app"'
