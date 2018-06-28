@@ -17,7 +17,7 @@ if [[ $(command -v convert) == "" ]]; then
 fi
 
 # combining JPG files into one PDF
-echo "\n\nStarting combining of JPGs into one file\n"
+echo "\n\nStarting combination of JPGs into one file\n"
 convert *.jpg FinishedPDFDocument.pdf
 echo "Finished combining JPGs into one PDF\n"
 echo "Starting deleting of JPGs\n"
@@ -31,9 +31,15 @@ mv FinishedPDFDocument.pdf ${PDFName}.pdf
 echo "\nWould you like to combine any PDF files? (Type yes or no and press enter)\n"
 read response
 
+while [ "$response" != "no" ]; do
+	echo "Please type the name of the first PDF document you would like to add. Type no if you are done"
+	read response
+	
+done
 	
 
-
-
+echo "\nBeginning combination of PDF files into one file\n"
+echo "Finished combining PDFs into one file\n"
+echo "\nThank you for using our program and please come back soon :)\n"
 # quit terminal window
 osascript -e 'quit app "terminal.app"'
