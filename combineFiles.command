@@ -37,7 +37,8 @@ if [ "$response" == "yes" ]; then
 	    brew install poppler
 	fi
 
-	echo "Please make sure that your PDF files are named 1.pdf, 2.pdf, 3.pdf, ... according to the order in which you would like them to be combined."
+	echo "Please make sure that your PDF files are named 1.pdf, 2.pdf, 3.pdf, ... in the finder window according to the order in which you would like them to be combined."
+	echo ""
 	read -p "Press enter when you are ready. (Press Ctrl+C if you accidentally typed yes and want to quit)"
 
 	echo "Starting combination of PDF files."
@@ -49,7 +50,11 @@ if [ "$response" == "yes" ]; then
 	
 	if [[ "$response" == "yes" ]]; then
 		echo "Starting deletion of PDF files"
-		#rm *.pdf !(CombinedPDFFiles.pdf)
+		mkdir tempFolder
+		mv CombinedPDFFiles.pdf tempFolder/
+		rm *.pdf
+		mv tempFolder/CombinedPDFFiles.pdf CombinedPDFFiles.pdf
+		rm -r tempFolder
 		echo "Finished deleting PDF files"
 	fi
 fi
