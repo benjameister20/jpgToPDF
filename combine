@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo “Starting conversion\n”
-convert *.jpg FinishedPDFDocument.pdf
-echo “Finished conversion\n”
-
-
